@@ -39,6 +39,7 @@ export async function updateSession(request: NextRequest) {
   const isRootRoute = pathname === "/";
   const isAuthRoute = pathname.startsWith("/auth");
   const isLoginRoute = pathname === "/auth/login";
+  const isProfileSyncRoute = pathname === "/api/auth/sync-profile";
   const isAdminRoute = pathname.startsWith("/admin");
   const isDipendenteRoute = pathname.startsWith("/dipendente");
   const hasPwaCookie = request.cookies.get("pwa-installed")?.value === "true";
@@ -63,6 +64,9 @@ export async function updateSession(request: NextRequest) {
       .single();
 
     if (!profile) {
+      if (isLoginRoute || isProfileSyncRoute) {
+        return supabaseResponse;
+      }
       return NextResponse.redirect(new URL("/auth/login", request.url));
     }
 

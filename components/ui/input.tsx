@@ -1,14 +1,22 @@
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
 
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     return (
       <input
         type={type}
         className={cn(
-          "flex h-11 w-full rounded-xl border-[1.5px] border-[#E8EAF0] bg-[#F8F9FC] px-4 py-2 text-[0.9375rem] text-[#0A0C14] shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] transition-all duration-150 placeholder:text-[#9199B1] focus-visible:border-[#3B6FE8] focus-visible:bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[rgba(59,111,232,0.1)] disabled:cursor-not-allowed disabled:opacity-50 file:border-0 file:bg-transparent file:text-sm file:font-medium",
+          "flex h-12 w-full rounded-[14px] px-4 py-3 text-[0.9375rem] font-medium",
+          "bg-[#EAE6DF] border-0 outline-none",
+          "text-[#0C1117] placeholder:text-[#94A3B8] placeholder:font-normal",
+          "transition-all duration-150",
+          "focus:bg-white focus:ring-[3px] focus:ring-[rgba(43,92,230,0.18)]",
+          "focus:shadow-[0_4px_16px_rgba(12,26,58,0.09)]",
+          "disabled:opacity-50 disabled:cursor-not-allowed",
+          "file:border-0 file:bg-transparent file:text-sm file:font-semibold",
           className
         )}
         ref={ref}
