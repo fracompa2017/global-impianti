@@ -18,7 +18,6 @@ export interface ReportPdfData {
   cantiere: string;
   data: string;
   testo: string;
-  meteo?: string;
   materiali?: string;
   problemi?: string;
 }
@@ -39,13 +38,6 @@ export function ReportDocument({ data }: { data: ReportPdfData }) {
           <Text style={styles.label}>Attivita svolte</Text>
           <Text>{data.testo}</Text>
         </View>
-
-        {data.meteo ? (
-          <View style={styles.section}>
-            <Text style={styles.label}>Meteo</Text>
-            <Text>{data.meteo}</Text>
-          </View>
-        ) : null}
 
         {data.materiali ? (
           <View style={styles.section}>

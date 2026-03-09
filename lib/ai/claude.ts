@@ -20,6 +20,16 @@ export interface ReportInterventoInput {
   esito?: string;
 }
 
+export interface ReportGiornalieroInput {
+  cantiere: string;
+  dipendente: string;
+  data: string;
+  descrizione_lavori: string;
+  materiali_utilizzati?: string;
+  problemi_riscontrati?: string;
+  n_foto_allegate: number;
+}
+
 export async function generateReportIntervento(input: ReportInterventoInput) {
   const anthropic = getClient();
 
@@ -86,4 +96,39 @@ Rispondi SOLO con JSON valido nel formato:
   const textBlocks = response.content.filter((c) => c.type === "text");
   const text = textBlocks.map((b) => b.text).join("\n").trim();
   return JSON.parse(text);
+}
+
+export async function generateReportGiornaliero(input: ReportGiornalieroInput) {
+  const anthropic = getClient();
+
+  const prompt = `
+Genera un report giornaliero professionale in italiano, conciso e adatto alla consegna al cliente.
+
+Cantiere: ${input.cantiere}
+Tecnico: ${input.dipendente}
+Data: ${input.data}
+Descrizione lavori: ${input.descrizione_lavori}
+Materiali utilizzati: ${input.materiali_utilizzati ?? "N/D"}
+Problemi riscontrati: ${input.problemi_riscontrati ?? "Nessuno"}
+Numero foto allegate: ${input.n_foto_allegate}
+
+Formato obbligatorio:
+- Intestazione con cantiere, data, tecnico
+- Sezione "Lavori eseguiti"
+- Sezione "Materiali impiegati" (solo se presenti materiali)
+- Sezione "Note tecniche" (solo se presenti problemi o anomalie)
+- Footer: "Report corredato da ${input.n_foto_allegate} fotografie"
+`;
+
+  const response = await anthropic.messages.create({
+    model: MODEL,
+    max_tokens: 1200,
+    temperature: 0.2,
+    system:
+      "Sei un capocantiere tecnico. Scrivi in tono professionale, chiaro, concreto e senza prolissità.",
+    messages: [{ role: "user", content: prompt }],
+  });
+
+  const textBlocks = response.content.filter((c) => c.type === "text");
+  return textBlocks.map((b) => b.text).join("\n").trim();
 }

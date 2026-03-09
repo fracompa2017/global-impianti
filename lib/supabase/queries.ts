@@ -37,8 +37,7 @@ export async function getAdminDashboardData() {
     supabase
       .from("timbrature")
       .select("*", { count: "exact", head: true })
-      .eq("data", today)
-      .not("ora_entrata", "is", null),
+      .eq("data", today),
     supabase
       .from("report_giornalieri")
       .select("*", { count: "exact", head: true })
@@ -47,14 +46,14 @@ export async function getAdminDashboardData() {
 
   const { data: oreRows } = await supabase
     .from("timbrature")
-    .select("ore_totali")
+    .select("tipo_giornata")
     .gte("data", monthStart)
     .lte("data", monthEnd);
 
-  const oreTotaliMese = (oreRows ?? []).reduce(
-    (acc, row) => acc + Number(row.ore_totali ?? 0),
-    0
-  );
+  const oreTotaliMese = (oreRows ?? []).reduce((acc, row) => {
+    const tipo = row.tipo_giornata ?? "intera";
+    return acc + (tipo === "mezza" ? 4 : 8);
+  }, 0);
 
   const { data: cantieriInCorso } = await supabase
     .from("cantieri")
@@ -140,13 +139,12 @@ export async function getTeamRows() {
       .in("dipendente_id", ids),
     supabase
       .from("timbrature")
-      .select("dipendente_id, ora_entrata")
+      .select("dipendente_id")
       .eq("data", today)
-      .in("dipendente_id", ids)
-      .not("ora_entrata", "is", null),
+      .in("dipendente_id", ids),
     supabase
       .from("timbrature")
-      .select("dipendente_id, ore_totali, data")
+      .select("dipendente_id, tipo_giornata, data")
       .in("dipendente_id", ids)
       .gte("data", monthStart)
       .lte("data", monthEnd),
@@ -159,7 +157,7 @@ export async function getTeamRows() {
     const isPresente = (presenza ?? []).some((p) => p.dipendente_id === d.id);
     const oreMese = (timbratureMese ?? [])
       .filter((row) => row.dipendente_id === d.id)
-      .reduce((acc, row) => acc + Number(row.ore_totali ?? 0), 0);
+      .reduce((acc, row) => acc + ((row.tipo_giornata ?? "intera") === "mezza" ? 4 : 8), 0);
     const timbratureCount = (timbratureMese ?? []).filter(
       (row) => row.dipendente_id === d.id
     ).length;
@@ -253,7 +251,7 @@ export async function getCantiereDetails(id: string) {
         .order("ordine", { ascending: true }),
       supabase
         .from("report_giornalieri")
-        .select("id, data, testo, meteo, materiali_utilizzati, problemi_riscontrati, profiles(full_name)")
+        .select("id, data, testo, materiali_utilizzati, problemi_riscontrati, profiles(full_name)")
         .eq("cantiere_id", id)
         .order("data", { ascending: false })
         .limit(30),

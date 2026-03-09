@@ -152,9 +152,7 @@ export type Database = {
           dipendente_id: string | null;
           cantiere_id: string | null;
           data: string;
-          ora_entrata: string | null;
-          ora_uscita: string | null;
-          ore_totali: number | null;
+          tipo_giornata: "intera" | "mezza" | null;
           note: string | null;
           created_at: string;
         };
@@ -163,8 +161,7 @@ export type Database = {
           dipendente_id?: string | null;
           cantiere_id?: string | null;
           data: string;
-          ora_entrata?: string | null;
-          ora_uscita?: string | null;
+          tipo_giornata?: "intera" | "mezza" | null;
           note?: string | null;
           created_at?: string;
         };
@@ -173,8 +170,7 @@ export type Database = {
           dipendente_id?: string | null;
           cantiere_id?: string | null;
           data?: string;
-          ora_entrata?: string | null;
-          ora_uscita?: string | null;
+          tipo_giornata?: "intera" | "mezza" | null;
           note?: string | null;
           created_at?: string;
         };
@@ -187,7 +183,6 @@ export type Database = {
           data: string;
           testo: string | null;
           testo_generato_ai: string | null;
-          meteo: string | null;
           materiali_utilizzati: string | null;
           problemi_riscontrati: string | null;
           created_at: string;
@@ -199,7 +194,6 @@ export type Database = {
           data: string;
           testo?: string | null;
           testo_generato_ai?: string | null;
-          meteo?: string | null;
           materiali_utilizzati?: string | null;
           problemi_riscontrati?: string | null;
           created_at?: string;
@@ -211,7 +205,6 @@ export type Database = {
           data?: string;
           testo?: string | null;
           testo_generato_ai?: string | null;
-          meteo?: string | null;
           materiali_utilizzati?: string | null;
           problemi_riscontrati?: string | null;
           created_at?: string;

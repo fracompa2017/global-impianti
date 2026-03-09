@@ -16,7 +16,7 @@ export async function GET(
 
   const { data: report, error } = await supabase
     .from("report_giornalieri")
-    .select("id, data, testo, meteo, materiali_utilizzati, problemi_riscontrati, cantieri(nome), profiles(full_name)")
+    .select("id, data, testo, materiali_utilizzati, problemi_riscontrati, cantieri(nome), profiles(full_name)")
     .eq("id", id)
     .single();
 
@@ -31,7 +31,6 @@ export async function GET(
         cantiere: (report as any).cantieri?.nome ?? "Cantiere",
         data: report.data,
         testo: report.testo ?? "",
-        meteo: report.meteo ?? undefined,
         materiali: report.materiali_utilizzati ?? undefined,
         problemi: report.problemi_riscontrati ?? undefined,
       },

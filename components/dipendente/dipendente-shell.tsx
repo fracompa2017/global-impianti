@@ -8,7 +8,6 @@ import {
   FolderKanban,
   Home,
   LogOut,
-  MapPin,
   UserCircle2,
   Wrench,
 } from "lucide-react";
@@ -50,16 +49,6 @@ export function DipendenteShell({ pathname, userName, children }: DipendenteShel
           <UserCircle2 className="h-10 w-10 text-white/90" />
         </div>
       </header>
-
-      <div className="relative z-20 -mt-6 px-6 md:px-8">
-        <div className="rounded-[20px] border border-[#E8EAF0] bg-white p-4 shadow-[0_12px_26px_rgba(15,23,42,0.09)]">
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#9199B1]">Cantiere di oggi</p>
-          <div className="mt-2 flex items-center gap-2 text-sm font-semibold text-[#0A0C14]">
-            <MapPin className="h-4 w-4 text-[#3B6FE8]" />
-            Pianificazione operativa in corso
-          </div>
-        </div>
-      </div>
 
       <motion.main
         key={pathname}

@@ -52,7 +52,7 @@ const navSections: Array<{ title: string; items: NavItem[] }> = [
     title: "OPERATIVO",
     items: [
       { href: "/admin/turni", label: "Turni", icon: CalendarDays, disabled: true },
-      { href: "/admin/presenze", label: "Presenze", icon: UserCheck, disabled: true },
+      { href: "/admin/presenze", label: "Presenze", icon: UserCheck },
       { href: "/admin/report-interventi", label: "Report", icon: FileText, disabled: true },
       { href: "/admin/segnalazioni", label: "Segnalazioni", icon: ShieldAlert, disabled: true },
     ],

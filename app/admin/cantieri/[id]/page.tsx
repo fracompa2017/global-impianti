@@ -95,7 +95,7 @@ export default async function CantiereDetailsPage({
                     </div>
                     <p className="text-sm">{report.testo ?? "Nessun testo"}</p>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      Meteo: {report.meteo ?? "N/D"} | Materiali: {report.materiali_utilizzati ?? "N/D"}
+                      Materiali: {report.materiali_utilizzati ?? "N/D"} | Problemi: {report.problemi_riscontrati ?? "N/D"}
                     </p>
                   </article>
                 ))
