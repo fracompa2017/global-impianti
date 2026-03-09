@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Global Impianti">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0891b2"/>
+      <stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="24" fill="url(#g)"/>
+  <path d="M64 18c-4.5 0-8 3.5-8 8v26H30c-4.5 0-8 3.5-8 8s3.5 8 8 8h26v34c0 4.5 3.5 8 8 8s8-3.5 8-8V68h26c4.5 0 8-3.5 8-8s-3.5-8-8-8H72V26c0-4.5-3.5-8-8-8z" fill="#fff"/>
+</svg>

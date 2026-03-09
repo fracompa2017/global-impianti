@@ -1,0 +1,27 @@
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  RewriteRule ^auth/login/?$ index.php?page=auth/login [L,QSA]
+  RewriteRule ^auth/logout/?$ index.php?page=auth/logout [L,QSA]
+  RewriteRule ^admin/dashboard/?$ index.php?page=admin/dashboard [L,QSA]
+  RewriteRule ^admin/team/?$ index.php?page=admin/team [L,QSA]
+  RewriteRule ^admin/cantieri/?$ index.php?page=admin/cantieri [L,QSA]
+  RewriteRule ^admin/cantieri/([0-9]+)/?$ index.php?page=admin/cantiere&id=$1 [L,QSA]
+  RewriteRule ^admin/segnalazioni/?$ index.php?page=admin/segnalazioni [L,QSA]
+  RewriteRule ^admin/segnalazioni/nuova/?$ index.php?page=admin/segnalazioni/nuova [L,QSA]
+  RewriteRule ^admin/segnalazioni/calendario/?$ index.php?page=admin/segnalazioni/calendario [L,QSA]
+  RewriteRule ^admin/segnalazioni/([0-9]+)/?$ index.php?page=admin/segnalazioni/view&id=$1 [L,QSA]
+  RewriteRule ^admin/report-interventi/?$ index.php?page=admin/report-interventi [L,QSA]
+  RewriteRule ^admin/report-interventi/pdf/([0-9]+)/?$ index.php?page=admin/report-interventi/pdf&id=$1 [L,QSA]
+  RewriteRule ^dipendente/home/?$ index.php?page=dipendente/home [L,QSA]
+  RewriteRule ^dipendente/interventi/?$ index.php?page=dipendente/interventi [L,QSA]
+  RewriteRule ^dipendente/interventi/([0-9]+)/?$ index.php?page=dipendente/interventi/view&id=$1 [L,QSA]
+  RewriteRule ^dipendente/interventi/([0-9]+)/report/?$ index.php?page=dipendente/interventi/report&id=$1 [L,QSA]
+  RewriteRule ^api/calendar/([0-9]+)/ics/?$ index.php?page=calendar/ics&id=$1 [L,QSA]
+</IfModule>
